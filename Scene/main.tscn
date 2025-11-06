@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://14tlhmqp8xdr"]
+
+[ext_resource type="Texture2D" uid="uid://c7hv8i01onljk" path="res://Assets/bg.png" id="1_f6udf"]
+[ext_resource type="Script" uid="uid://bibfav7is3olc" path="res://Scene/main.gd" id="1_r34rm"]
+[ext_resource type="PackedScene" uid="uid://cgsnlv04pp16f" path="res://Scene/pipe.tscn" id="2_3amdw"]
+[ext_resource type="PackedScene" uid="uid://n4tmjde8gsmb" path="res://Scene/player.tscn" id="2_sblpm"]
+[ext_resource type="PackedScene" uid="uid://be1p1aybtamdg" path="res://Scene/ground.tscn" id="4_2wwxx"]
+[ext_resource type="PackedScene" uid="uid://n78j35v4kwtk" path="res://Scene/die.tscn" id="6_1xcnr"]
+[ext_resource type="PackedScene" uid="uid://4rv6lrunkpmc" path="res://Scene/game_over.tscn" id="7_ow1sv"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_r34rm")
+pipe_scene = ExtResource("2_3amdw")
+
+[node name="background" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_f6udf")
+offset = Vector2(432, 384)
+
+[node name="background2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(432, 0)
+texture = ExtResource("1_f6udf")
+offset = Vector2(864, 384)
+
+[node name="bird" parent="." instance=ExtResource("2_sblpm")]
+position = Vector2(178, 220)
+
+[node name="Die" parent="." instance=ExtResource("6_1xcnr")]
+z_index = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_top = -234.0
+offset_right = -39.0
+offset_bottom = -194.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(4, 4)
+
+[node name="Ground" parent="." instance=ExtResource("4_2wwxx")]
+z_index = 1
+
+[node name="PipeTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="score" type="Label" parent="."]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.5
+offset_right = 36.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "SCORE : 0"
+
+[node name="gameOver" parent="." instance=ExtResource("7_ow1sv")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(432, 467)
+
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="gameOver" to="." method="_on_game_over_restart"]

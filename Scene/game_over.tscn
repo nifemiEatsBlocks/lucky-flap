@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://4rv6lrunkpmc"]
+
+[ext_resource type="Script" uid="uid://cggnhudeg2imk" path="res://game_over.gd" id="1_lwxdm"]
+[ext_resource type="Texture2D" uid="uid://c348qy83yiif0" path="res://Scene/restart.png" id="2_mjsgh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xnpu1"]
+texture = ExtResource("2_mjsgh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3p3j6"]
+texture = ExtResource("2_mjsgh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t757r"]
+texture = ExtResource("2_mjsgh")
+
+[node name="gameOver" type="CanvasLayer"]
+script = ExtResource("1_lwxdm")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 342.0
+offset_top = 350.0
+offset_right = 502.0
+offset_bottom = 413.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_xnpu1")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3p3j6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_t757r")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

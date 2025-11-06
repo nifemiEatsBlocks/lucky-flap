@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://cgsnlv04pp16f"]
+
+[ext_resource type="Script" uid="uid://b3t8pk1wfcfmv" path="res://pipe.gd" id="1_ssxuh"]
+[ext_resource type="Texture2D" uid="uid://cxvj3661dw1qx" path="res://Assets/pipe.png" id="2_s183f"]
+[ext_resource type="AudioStream" uid="uid://ckumsq2oj0c2q" path="res://Assets/car-crash-sound-376882.mp3" id="3_du0m1"]
+[ext_resource type="AudioStream" uid="uid://d055d3amdvlaw" path="res://Assets/ding-101492.mp3" id="4_vgtpv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_du0m1"]
+size = Vector2(72, 525)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vgtpv"]
+size = Vector2(79, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ssxuh"]
+size = Vector2(12, 194)
+
+[node name="Pipe" type="Area2D" groups=["Pipes"]]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_ssxuh")
+
+[node name="upper" type="Sprite2D" parent="."]
+texture = ExtResource("2_s183f")
+offset = Vector2(0, -380)
+flip_v = true
+
+[node name="lower" type="Sprite2D" parent="."]
+texture = ExtResource("2_s183f")
+offset = Vector2(0, 380)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 398.5)
+shape = SubResource("RectangleShape2D_du0m1")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(0, -398)
+shape = SubResource("RectangleShape2D_du0m1")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 117.5)
+shape = SubResource("RectangleShape2D_vgtpv")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(0, -118)
+shape = SubResource("RectangleShape2D_vgtpv")
+
+[node name="score_Area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="score_Area"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_ssxuh")
+
+[node name="crash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_du0m1")
+
+[node name="scorePoint" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vgtpv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="score_Area" to="." method="_on_score_area_body_entered"]

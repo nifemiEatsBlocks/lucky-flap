@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://be1p1aybtamdg"]
+
+[ext_resource type="Texture2D" uid="uid://cj30pijnq6vp5" path="res://Assets/ground.png" id="1_jayga"]
+[ext_resource type="Script" uid="uid://xknn6cd48gd4" path="res://Scene/ground.gd" id="1_jdtpl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdtpl"]
+size = Vector2(1731, 168)
+
+[node name="Ground" type="Area2D"]
+position = Vector2(0, 852)
+script = ExtResource("1_jdtpl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jayga")
+offset = Vector2(864, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(864.5, 2)
+shape = SubResource("RectangleShape2D_jdtpl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

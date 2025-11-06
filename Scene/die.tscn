@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://n78j35v4kwtk"]
+
+[ext_resource type="Texture2D" uid="uid://cdu5bmu74npxu" path="res://Assets/dice.png" id="1_an43y"]
+[ext_resource type="Script" uid="uid://nr1yp2k7iakn" path="res://Scene/die.gd" id="1_tdrfq"]
+[ext_resource type="AudioStream" uid="uid://bo5c1v4j4aboe" path="res://Assets/dice-142528.wav" id="3_x62wf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61tvx"]
+atlas = ExtResource("1_an43y")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdrfq"]
+atlas = ExtResource("1_an43y")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x62wf"]
+atlas = ExtResource("1_an43y")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0jh6"]
+atlas = ExtResource("1_an43y")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnk1p"]
+atlas = ExtResource("1_an43y")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yuybs"]
+atlas = ExtResource("1_an43y")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_61tvx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61tvx")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdrfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x62wf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0jh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnk1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yuybs")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 20.0
+}]
+
+[node name="Die" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_tdrfq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_61tvx")
+animation = &"roll"
+autoplay = "new_animation"
+
+[node name="rollSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_x62wf")

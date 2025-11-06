@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://n4tmjde8gsmb"]
+
+[ext_resource type="Script" uid="uid://ck7hlfv326fk5" path="res://Scene/player.gd" id="1_58ae2"]
+[ext_resource type="Texture2D" uid="uid://cxyd2ih1deih6" path="res://Assets/bird1.png" id="1_xa75v"]
+[ext_resource type="Texture2D" uid="uid://bu5pe14jmowcw" path="res://Assets/bird2.png" id="2_58ae2"]
+[ext_resource type="Texture2D" uid="uid://3yoc8fca7irc" path="res://Assets/bird3.png" id="3_ivevv"]
+[ext_resource type="Texture2D" uid="uid://b1x54kaeiuhxm" path="res://Assets/glow-blue-light-effect-free-png.png" id="5_ivevv"]
+[ext_resource type="AudioStream" uid="uid://d401qkygxpgo" path="res://Assets/8-bit-jump-001-171817.wav" id="6_r6jsd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r6jsd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xa75v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_58ae2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ivevv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p6qlh"]
+radius = 16.03122
+
+[node name="bird" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 0
+script = ExtResource("1_58ae2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_r6jsd")
+frame = 2
+frame_progress = 0.935478
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p6qlh")
+
+[node name="shield" type="Sprite2D" parent="."]
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("5_ivevv")
+
+[node name="jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_r6jsd")
